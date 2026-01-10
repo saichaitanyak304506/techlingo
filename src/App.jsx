@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
+
 import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import Learn from "./pages/Learn";
@@ -13,10 +14,12 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
-// Protected Route wrapper
+/**
+ * @param {{ children: import("react").ReactNode }} props
+ */
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuth();
-  
+
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -24,11 +27,11 @@ const ProtectedRoute = ({ children }) => {
       </div>
     );
   }
-  
+
   if (!isAuthenticated) {
     return <Navigate to="/auth" replace />;
   }
-  
+
   return <>{children}</>;
 };
 
@@ -37,29 +40,29 @@ const AppRoutes = () => {
     <Routes>
       <Route path="/" element={<Index />} />
       <Route path="/auth" element={<Auth />} />
-      <Route 
-        path="/learn" 
+      <Route
+        path="/learn"
         element={
           <ProtectedRoute>
             <Learn />
           </ProtectedRoute>
-        } 
+        }
       />
-      <Route 
-        path="/play" 
+      <Route
+        path="/play"
         element={
           <ProtectedRoute>
             <Play />
           </ProtectedRoute>
-        } 
+        }
       />
-      <Route 
-        path="/progress" 
+      <Route
+        path="/progress"
         element={
           <ProtectedRoute>
             <Progress />
           </ProtectedRoute>
-        } 
+        }
       />
       <Route path="*" element={<NotFound />} />
     </Routes>

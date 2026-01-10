@@ -7,6 +7,8 @@ import { Label } from '@/components/ui/label';
 import { useAuth } from '@/context/AuthContext';
 import { toast } from 'sonner';
 import { z } from 'zod';
+import { authApi } from "@/lib/api";
+
 
 const loginSchema = z.object({
   email: z.string().email('Invalid email address'),
@@ -39,49 +41,47 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
-
-    try {
-      // Validate form data
-      const schema = isLogin ? loginSchema : registerSchema;
-      schema.parse(formData);
-    } catch (err) {
-      if (err instanceof z.ZodError) {
-        const newErrors = {};
-        err.errors.forEach(error => {
-          if (error.path[0]) {
-            newErrors[error.path[0].toString()] = error.message;
-          }
-        });
-        setErrors(newErrors);
-        return;
-      }
-    }
-
     setIsLoading(true);
 
     try {
-      // Mock API call - replace with actual API when backend is connected
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const schema = isLogin ? loginSchema : registerSchema;
+      schema.parse(formData);
 
-      // Mock successful auth
-      const mockUser = {
-        id: 1,
-        email: formData.email,
-        username: formData.username || formData.email.split('@')[0],
-        total_xp: 0,
-        current_streak: 0,
-        created_at: new Date().toISOString(),
-      };
+      let response;
 
-      login('mock_token_12345', mockUser);
-      toast.success(isLogin ? 'Welcome back!' : 'Account created successfully!');
-      navigate('/');
-    } catch {
-      toast.error('Authentication failed. Please try again.');
+      if (isLogin) {
+        response = await authApi.login({
+          email: formData.email,
+          password: formData.password,
+        });
+      } else {
+        response = await authApi.register({
+          email: formData.email,
+          username: formData.username,
+          password: formData.password,
+        });
+      }
+
+      // response = { access_token, token_type, user }
+      login(response.access_token, response.user);
+
+      toast.success(
+        isLogin ? "Welcome back!" : "Account created successfully!"
+      );
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+
+      if (err.response?.data?.detail) {
+        toast.error(err.response.data.detail);
+      } else {
+        toast.error("Authentication failed");
+      }
     } finally {
       setIsLoading(false);
     }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">

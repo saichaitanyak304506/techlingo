@@ -59,7 +59,7 @@ const Progress = () => {
 
   return (
     <Layout>
-      <div className="container py-8">
+      <div className="max-w-7xl mx-auto px-6 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-extrabold text-foreground mb-2">
@@ -77,9 +77,15 @@ const Progress = () => {
               <div className={`inline-flex p-3 rounded-xl ${stat.color} mb-3`}>
                 <stat.icon className="h-5 w-5" />
               </div>
-              <p className="text-3xl font-extrabold text-foreground">{stat.value}</p>
-              <p className="text-sm font-semibold text-foreground">{stat.label}</p>
-              <p className="text-xs text-muted-foreground mt-1">{stat.description}</p>
+              <p className="text-3xl font-extrabold text-foreground">
+                {stat.value}
+              </p>
+              <p className="text-sm font-semibold text-foreground">
+                {stat.label}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {stat.description}
+              </p>
             </div>
           ))}
         </div>
@@ -87,24 +93,29 @@ const Progress = () => {
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Category Progress */}
           <div className="game-card">
-            <h2 className="text-xl font-bold text-foreground mb-6">Category Progress</h2>
+            <h2 className="text-xl font-bold text-foreground mb-6">
+              Category Progress
+            </h2>
             <div className="space-y-4">
               {categories.map((category) => {
                 const learned = Math.floor(Math.random() * category.count);
                 const percentage = Math.round((learned / category.count) * 100);
-                const isCompleted = mockUserProgress.categories_completed.includes(category.name);
-                
+                const isCompleted =
+                  mockUserProgress.categories_completed.includes(category.name);
+
                 return (
                   <div key={category.name}>
                     <div className="flex items-center justify-between mb-2">
-                      <span className="font-semibold text-foreground">{category.name}</span>
+                      <span className="font-semibold text-foreground">
+                        {category.name}
+                      </span>
                       <span className="text-sm text-muted-foreground">
                         {learned}/{category.count}
                         {isCompleted && <span className="ml-2">✅</span>}
                       </span>
                     </div>
                     <div className="progress-bar">
-                      <div 
+                      <div
                         className={cn(
                           "h-full rounded-full transition-all duration-500",
                           isCompleted ? "bg-correct" : "progress-bar-fill"
@@ -120,17 +131,21 @@ const Progress = () => {
 
           {/* Leaderboard */}
           <div className="game-card">
-            <h2 className="text-xl font-bold text-foreground mb-6">Leaderboard 🏆</h2>
+            <h2 className="text-xl font-bold text-foreground mb-6">
+              Leaderboard 🏆
+            </h2>
             <div className="space-y-3">
               {mockLeaderboard.map((entry) => {
                 const isCurrentUser = entry.username === user?.username;
-                
+
                 return (
-                  <div 
+                  <div
                     key={entry.rank}
                     className={cn(
                       "flex items-center gap-4 p-3 rounded-xl transition-colors",
-                      isCurrentUser ? "bg-primary/10 border border-primary/30" : "bg-muted"
+                      isCurrentUser
+                        ? "bg-primary/10 border border-primary/30"
+                        : "bg-muted"
                     )}
                   >
                     <div className="w-8 flex justify-center">
@@ -141,12 +156,16 @@ const Progress = () => {
                       )}
                     </div>
                     <div className="flex-1">
-                      <p className={cn(
-                        "font-semibold",
-                        isCurrentUser ? "text-primary" : "text-foreground"
-                      )}>
+                      <p
+                        className={cn(
+                          "font-semibold",
+                          isCurrentUser ? "text-primary" : "text-foreground"
+                        )}
+                      >
                         {entry.username}
-                        {isCurrentUser && <span className="ml-2 text-xs">(You)</span>}
+                        {isCurrentUser && (
+                          <span className="ml-2 text-xs">(You)</span>
+                        )}
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
@@ -168,32 +187,80 @@ const Progress = () => {
 
         {/* Achievements */}
         <div className="game-card mt-8">
-          <h2 className="text-xl font-bold text-foreground mb-6">Achievements 🎖️</h2>
+          <h2 className="text-xl font-bold text-foreground mb-6">
+            Achievements 🎖️
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { name: 'First Steps', description: 'Complete your first quiz', unlocked: true, icon: '🎯' },
-              { name: 'Quick Learner', description: 'Learn 10 terms', unlocked: true, icon: '📚' },
-              { name: 'Streak Master', description: 'Get 5 answers in a row', unlocked: false, icon: '🔥' },
-              { name: 'Perfectionist', description: 'Score 100% on a quiz', unlocked: false, icon: '⭐' },
-              { name: 'Category Expert', description: 'Complete all terms in a category', unlocked: false, icon: '🏆' },
-              { name: 'XP Hunter', description: 'Earn 1000 XP', unlocked: false, icon: '💎' },
-              { name: 'Daily Devotee', description: 'Learn for 7 days straight', unlocked: false, icon: '📆' },
-              { name: 'Tech Guru', description: 'Learn all terms', unlocked: false, icon: '👑' },
+              {
+                name: "First Steps",
+                description: "Complete your first quiz",
+                unlocked: true,
+                icon: "🎯",
+              },
+              {
+                name: "Quick Learner",
+                description: "Learn 10 terms",
+                unlocked: true,
+                icon: "📚",
+              },
+              {
+                name: "Streak Master",
+                description: "Get 5 answers in a row",
+                unlocked: false,
+                icon: "🔥",
+              },
+              {
+                name: "Perfectionist",
+                description: "Score 100% on a quiz",
+                unlocked: false,
+                icon: "⭐",
+              },
+              {
+                name: "Category Expert",
+                description: "Complete all terms in a category",
+                unlocked: false,
+                icon: "🏆",
+              },
+              {
+                name: "XP Hunter",
+                description: "Earn 1000 XP",
+                unlocked: false,
+                icon: "💎",
+              },
+              {
+                name: "Daily Devotee",
+                description: "Learn for 7 days straight",
+                unlocked: false,
+                icon: "📆",
+              },
+              {
+                name: "Tech Guru",
+                description: "Learn all terms",
+                unlocked: false,
+                icon: "👑",
+              },
             ].map((achievement) => (
-              <div 
+              <div
                 key={achievement.name}
                 className={cn(
                   "p-4 rounded-xl border-2 text-center transition-all",
-                  achievement.unlocked 
-                    ? "bg-xp/10 border-xp/30" 
+                  achievement.unlocked
+                    ? "bg-xp/10 border-xp/30"
                     : "bg-muted border-border opacity-60"
                 )}
               >
                 <span className="text-3xl block mb-2">{achievement.icon}</span>
-                <p className="font-bold text-sm text-foreground">{achievement.name}</p>
-                <p className="text-xs text-muted-foreground mt-1">{achievement.description}</p>
+                <p className="font-bold text-sm text-foreground">
+                  {achievement.name}
+                </p>
+                <p className="text-xs text-muted-foreground mt-1">
+                  {achievement.description}
+                </p>
                 {achievement.unlocked && (
-                  <span className="text-xs text-correct font-semibold mt-2 block">✓ Unlocked</span>
+                  <span className="text-xs text-correct font-semibold mt-2 block">
+                    ✓ Unlocked
+                  </span>
                 )}
               </div>
             ))}

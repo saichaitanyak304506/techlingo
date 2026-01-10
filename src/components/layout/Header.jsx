@@ -15,7 +15,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/95 backdrop-blur supports-[backdrop-filter]:bg-card/60">
-      <div className="container flex h-16 items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 flex h-16 items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground transition-transform group-hover:scale-110">
@@ -29,22 +29,22 @@ const Header = () => {
         {/* Navigation */}
         {isAuthenticated && (
           <nav className="hidden md:flex items-center gap-6">
-            <Link 
-              to="/learn" 
+            <Link
+              to="/learn"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-semibold"
             >
               <BookOpen className="h-4 w-4" />
               Learn
             </Link>
-            <Link 
-              to="/play" 
+            <Link
+              to="/play"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-semibold"
             >
               <Trophy className="h-4 w-4" />
               Play
             </Link>
-            <Link 
-              to="/progress" 
+            <Link
+              to="/progress"
               className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors font-semibold"
             >
               <User className="h-4 w-4" />
@@ -54,7 +54,7 @@ const Header = () => {
         )}
 
         {/* User Section */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 h-10">
           {isAuthenticated && user ? (
             <>
               {/* Stats */}

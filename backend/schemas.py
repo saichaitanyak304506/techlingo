@@ -88,7 +88,7 @@ class GameQuestionResponse(BaseModel):
 
 
 class AnswerSubmit(BaseModel):
-    question_id: int
+    term_id: int
     answer: str
 
 

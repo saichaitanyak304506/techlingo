@@ -1,7 +1,7 @@
-import React from 'react';
-import { useAuth } from '@/context/AuthContext';
-import Dashboard from './Dashboard';
-import Landing from './Landing';
+import React from "react";
+import { useAuth } from "@/context/AuthContext";
+import Dashboard from "./Dashboard";
+import Landing from "./Landing";
 
 const Index = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -19,7 +19,13 @@ const Index = () => {
     );
   }
 
-  return isAuthenticated ? <Dashboard /> : <Landing />;
+  return (
+    <main className="min-h-screen bg-background">
+      <div className="container py-8">
+        {isAuthenticated ? <Dashboard /> : <Landing />}
+      </div>
+    </main>
+  );
 };
 
 export default Index;
