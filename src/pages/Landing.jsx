@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-const Landing: React.FC = () => {
+const Landing = () => {
   const features = [
     {
       icon: Gamepad2,

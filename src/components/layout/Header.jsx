@@ -4,7 +4,7 @@ import { Code2, Flame, Trophy, LogOut, User, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 
-const Header: React.FC = () => {
+const Header = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
 

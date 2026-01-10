@@ -2,13 +2,7 @@ import React from 'react';
 import { Trophy, Zap, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface XPDisplayProps {
-  xp: number;
-  animate?: boolean;
-  size?: 'sm' | 'md' | 'lg';
-}
-
-const XPDisplay: React.FC<XPDisplayProps> = ({ xp, animate = false, size = 'md' }) => {
+const XPDisplay = ({ xp, animate = false, size = 'md' }) => {
   const sizeClasses = {
     sm: 'text-sm px-2 py-1 gap-1',
     md: 'text-base px-3 py-1.5 gap-2',

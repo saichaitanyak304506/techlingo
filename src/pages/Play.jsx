@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
   ArrowRight, 
@@ -18,22 +18,21 @@ import CodeBlock from '@/components/game/CodeBlock';
 import XPDisplay from '@/components/game/XPDisplay';
 import { useAuth } from '@/context/AuthContext';
 import { mockTerms, generateGameQuestion } from '@/data/mockTerms';
-import type { GameQuestion } from '@/types';
 import { toast } from 'sonner';
 
 const QUESTIONS_PER_GAME = 5;
 const XP_CORRECT = 10;
 const XP_BONUS_STREAK = 5;
 
-const Play: React.FC = () => {
+const Play = () => {
   const navigate = useNavigate();
   const { user, updateUser } = useAuth();
 
   // Game state
   const [gameStarted, setGameStarted] = useState(false);
-  const [questions, setQuestions] = useState<GameQuestion[]>([]);
+  const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [showResult, setShowResult] = useState(false);
   const [showHint, setShowHint] = useState(false);
   
@@ -66,7 +65,7 @@ const Play: React.FC = () => {
     setGameStarted(true);
   }, []);
 
-  const handleSelectAnswer = (answer: string) => {
+  const handleSelectAnswer = (answer) => {
     if (showResult) return;
     setSelectedAnswer(answer);
   };

@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Code, Lightbulb, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import CodeBlock from '@/components/game/CodeBlock';
-import type { Term } from '@/types';
 import { cn } from '@/lib/utils';
-
-interface TermCardProps {
-  term: Term;
-}
 
 const difficultyColors = {
   beginner: 'bg-correct/10 text-correct border-correct/30',
@@ -15,7 +10,7 @@ const difficultyColors = {
   advanced: 'bg-streak/10 text-streak border-streak/30',
 };
 
-const TermCard: React.FC<TermCardProps> = ({ term }) => {
+const TermCard = ({ term }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (

@@ -1,16 +1,4 @@
 import axios from 'axios';
-import type { 
-  AuthResponse, 
-  LoginCredentials, 
-  RegisterCredentials, 
-  User, 
-  Term, 
-  GameQuestion, 
-  GameSession, 
-  AnswerResult,
-  UserProgress,
-  LeaderboardEntry
-} from '@/types';
 
 // Configure base URL - change this when connecting to your backend
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -46,23 +34,23 @@ api.interceptors.response.use(
 
 // Auth endpoints
 export const authApi = {
-  login: async (credentials: LoginCredentials): Promise<AuthResponse> => {
+  login: async (credentials) => {
     const response = await api.post('/auth/login', credentials);
     return response.data;
   },
 
-  register: async (credentials: RegisterCredentials): Promise<AuthResponse> => {
+  register: async (credentials) => {
     const response = await api.post('/auth/register', credentials);
     return response.data;
   },
 
-  logout: async (): Promise<void> => {
+  logout: async () => {
     await api.post('/auth/logout');
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user');
   },
 
-  getMe: async (): Promise<User> => {
+  getMe: async () => {
     const response = await api.get('/auth/me');
     return response.data;
   },
@@ -70,23 +58,23 @@ export const authApi = {
 
 // Terms endpoints
 export const termsApi = {
-  getAll: async (category?: string): Promise<Term[]> => {
+  getAll: async (category) => {
     const params = category ? { category } : {};
     const response = await api.get('/terms', { params });
     return response.data;
   },
 
-  getById: async (id: number): Promise<Term> => {
+  getById: async (id) => {
     const response = await api.get(`/terms/${id}`);
     return response.data;
   },
 
-  getCategories: async (): Promise<string[]> => {
+  getCategories: async () => {
     const response = await api.get('/terms/categories');
     return response.data;
   },
 
-  search: async (query: string): Promise<Term[]> => {
+  search: async (query) => {
     const response = await api.get('/terms/search', { params: { q: query } });
     return response.data;
   },
@@ -94,17 +82,17 @@ export const termsApi = {
 
 // Game endpoints
 export const gameApi = {
-  startSession: async (category?: string, difficulty?: string): Promise<GameSession> => {
+  startSession: async (category, difficulty) => {
     const response = await api.post('/game/start', { category, difficulty });
     return response.data;
   },
 
-  getQuestion: async (sessionId: number): Promise<GameQuestion> => {
+  getQuestion: async (sessionId) => {
     const response = await api.get(`/game/${sessionId}/question`);
     return response.data;
   },
 
-  submitAnswer: async (sessionId: number, questionId: number, answer: string): Promise<AnswerResult> => {
+  submitAnswer: async (sessionId, questionId, answer) => {
     const response = await api.post(`/game/${sessionId}/answer`, { 
       question_id: questionId, 
       answer 
@@ -112,12 +100,12 @@ export const gameApi = {
     return response.data;
   },
 
-  endSession: async (sessionId: number): Promise<GameSession> => {
+  endSession: async (sessionId) => {
     const response = await api.post(`/game/${sessionId}/end`);
     return response.data;
   },
 
-  getSessionHistory: async (): Promise<GameSession[]> => {
+  getSessionHistory: async () => {
     const response = await api.get('/game/history');
     return response.data;
   },
@@ -125,12 +113,12 @@ export const gameApi = {
 
 // Progress endpoints
 export const progressApi = {
-  getUserProgress: async (): Promise<UserProgress> => {
+  getUserProgress: async () => {
     const response = await api.get('/progress');
     return response.data;
   },
 
-  getLeaderboard: async (limit?: number): Promise<LeaderboardEntry[]> => {
+  getLeaderboard: async (limit) => {
     const params = limit ? { limit } : {};
     const response = await api.get('/progress/leaderboard', { params });
     return response.data;

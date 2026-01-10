@@ -7,9 +7,9 @@ import TermCard from '@/components/cards/TermCard';
 import CategoryCard from '@/components/cards/CategoryCard';
 import { mockTerms, getCategories } from '@/data/mockTerms';
 
-const Learn: React.FC = () => {
+const Learn = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const [showFilters, setShowFilters] = useState(false);
 
   const categories = getCategories();

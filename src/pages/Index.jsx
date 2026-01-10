@@ -3,7 +3,7 @@ import { useAuth } from '@/context/AuthContext';
 import Dashboard from './Dashboard';
 import Landing from './Landing';
 
-const Index: React.FC = () => {
+const Index = () => {
   const { isAuthenticated, isLoading } = useAuth();
 
   if (isLoading) {

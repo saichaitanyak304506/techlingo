@@ -3,20 +3,9 @@ import { Button } from '@/components/ui/button';
 import { Check, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface OptionButtonProps {
-  option: string;
-  index: number;
-  selected: boolean;
-  showResult: boolean;
-  isCorrect: boolean;
-  isCorrectAnswer: boolean;
-  onClick: () => void;
-  disabled: boolean;
-}
-
 const optionLabels = ['A', 'B', 'C', 'D'];
 
-const OptionButton: React.FC<OptionButtonProps> = ({
+const OptionButton = ({
   option,
   index,
   selected,

@@ -13,7 +13,7 @@ import { useAuth } from '@/context/AuthContext';
 import { mockUserProgress, mockLeaderboard, getCategories } from '@/data/mockTerms';
 import { cn } from '@/lib/utils';
 
-const Progress: React.FC = () => {
+const Progress = () => {
   const { user } = useAuth();
   const categories = getCategories();
 
@@ -48,7 +48,7 @@ const Progress: React.FC = () => {
     },
   ];
 
-  const getRankIcon = (rank: number) => {
+  const getRankIcon = (rank) => {
     switch (rank) {
       case 1: return <Crown className="h-5 w-5 text-xp" />;
       case 2: return <Medal className="h-5 w-5 text-muted-foreground" />;

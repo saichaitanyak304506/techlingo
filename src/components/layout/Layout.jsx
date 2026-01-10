@@ -1,11 +1,7 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import Header from './Header';
 
-interface LayoutProps {
-  children: ReactNode;
-}
-
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = ({ children }) => {
   return (
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
