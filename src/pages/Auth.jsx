@@ -17,7 +17,7 @@ const registerSchema = loginSchema.extend({
   username: z.string().min(3, 'Username must be at least 3 characters').max(20),
 });
 
-const Auth: React.FC = () => {
+const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -25,18 +25,18 @@ const Auth: React.FC = () => {
     password: '',
     username: '',
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState({});
   
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
     setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setErrors({});
 
@@ -46,7 +46,7 @@ const Auth: React.FC = () => {
       schema.parse(formData);
     } catch (err) {
       if (err instanceof z.ZodError) {
-        const newErrors: Record<string, string> = {};
+        const newErrors = {};
         err.errors.forEach(error => {
           if (error.path[0]) {
             newErrors[error.path[0].toString()] = error.message;

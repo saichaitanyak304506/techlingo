@@ -1,12 +1,6 @@
 import React from 'react';
 
-interface ProgressBarProps {
-  current: number;
-  total: number;
-  showLabel?: boolean;
-}
-
-const ProgressBar: React.FC<ProgressBarProps> = ({ current, total, showLabel = true }) => {
+const ProgressBar = ({ current, total, showLabel = true }) => {
   const percentage = total > 0 ? (current / total) * 100 : 0;
 
   return (

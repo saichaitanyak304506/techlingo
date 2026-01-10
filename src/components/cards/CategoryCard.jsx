@@ -11,14 +11,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-interface CategoryCardProps {
-  name: string;
-  termCount: number;
-  onClick: () => void;
-  isSelected?: boolean;
-}
-
-const categoryIcons: Record<string, React.ReactNode> = {
+const categoryIcons = {
   'Web Development': <Globe className="h-6 w-6" />,
   'Database': <Database className="h-6 w-6" />,
   'Security': <Lock className="h-6 w-6" />,
@@ -29,7 +22,7 @@ const categoryIcons: Record<string, React.ReactNode> = {
   'General': <Terminal className="h-6 w-6" />,
 };
 
-const categoryColors: Record<string, string> = {
+const categoryColors = {
   'Web Development': 'from-primary to-primary/70',
   'Database': 'from-streak to-streak/70',
   'Security': 'from-destructive to-destructive/70',
@@ -40,7 +33,7 @@ const categoryColors: Record<string, string> = {
   'General': 'from-muted-foreground to-muted-foreground/70',
 };
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ name, termCount, onClick, isSelected }) => {
+const CategoryCard = ({ name, termCount, onClick, isSelected }) => {
   const icon = categoryIcons[name] || <Terminal className="h-6 w-6" />;
   const gradient = categoryColors[name] || 'from-primary to-primary/70';
 

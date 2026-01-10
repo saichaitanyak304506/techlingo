@@ -1,6 +1,4 @@
-import type { Term, GameQuestion, UserProgress, LeaderboardEntry } from '@/types';
-
-export const mockTerms: Term[] = [
+export const mockTerms = [
   {
     id: 1,
     name: 'API',
@@ -195,7 +193,7 @@ LPUSH notifications "New message"  # Push to list`,
   },
 ];
 
-export const generateGameQuestion = (term: Term, allTerms: Term[]): GameQuestion => {
+export const generateGameQuestion = (term, allTerms) => {
   const incorrectOptions = allTerms
     .filter(t => t.id !== term.id)
     .sort(() => Math.random() - 0.5)
@@ -217,7 +215,7 @@ export const generateGameQuestion = (term: Term, allTerms: Term[]): GameQuestion
   };
 };
 
-export const mockUserProgress: UserProgress = {
+export const mockUserProgress = {
   user_id: 1,
   terms_learned: 8,
   total_terms: 12,
@@ -226,7 +224,7 @@ export const mockUserProgress: UserProgress = {
   recent_terms: mockTerms.slice(0, 5),
 };
 
-export const mockLeaderboard: LeaderboardEntry[] = [
+export const mockLeaderboard = [
   { rank: 1, username: 'CodeMaster', total_xp: 2500, current_streak: 15 },
   { rank: 2, username: 'DevNinja', total_xp: 2100, current_streak: 12 },
   { rank: 3, username: 'TechGuru', total_xp: 1800, current_streak: 8 },
@@ -234,8 +232,8 @@ export const mockLeaderboard: LeaderboardEntry[] = [
   { rank: 5, username: 'StackPro', total_xp: 1200, current_streak: 3 },
 ];
 
-export const getCategories = (): { name: string; count: number }[] => {
-  const categoryMap = new Map<string, number>();
+export const getCategories = () => {
+  const categoryMap = new Map();
   mockTerms.forEach(term => {
     categoryMap.set(term.category, (categoryMap.get(term.category) || 0) + 1);
   });

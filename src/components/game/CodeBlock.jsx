@@ -2,12 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Code } from 'lucide-react';
 
-interface CodeBlockProps {
-  code: string;
-  language?: string;
-}
-
-const CodeBlock: React.FC<CodeBlockProps> = ({ code, language = 'javascript' }) => {
+const CodeBlock = ({ code, language = 'javascript' }) => {
   return (
     <div className="rounded-xl overflow-hidden border border-border">
       <div className="flex items-center gap-2 px-4 py-2 bg-muted border-b border-border">

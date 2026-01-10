@@ -16,7 +16,7 @@ import { useAuth } from '@/context/AuthContext';
 import { mockUserProgress, getCategories } from '@/data/mockTerms';
 import CategoryCard from '@/components/cards/CategoryCard';
 
-const Dashboard: React.FC = () => {
+const Dashboard = () => {
   const { user } = useAuth();
   const categories = getCategories();
 
