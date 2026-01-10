@@ -1,0 +1,208 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Code Vocabulary Builder - Tech Duolingo Design System */
+/* Inspired by Duolingo's playful, gamified aesthetic */
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fira+Code:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    /* Core brand colors - Duolingo-inspired green theme */
+    --background: 140 20% 98%;
+    --foreground: 220 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    /* Primary - Vibrant green (learning/success) */
+    --primary: 145 65% 42%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary - Soft blue (info/neutral) */
+    --secondary: 210 60% 95%;
+    --secondary-foreground: 210 50% 40%;
+
+    /* Muted - Light gray for backgrounds */
+    --muted: 140 15% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Accent - Bright yellow (achievements/highlights) */
+    --accent: 45 95% 55%;
+    --accent-foreground: 30 80% 20%;
+
+    /* Destructive - Soft red for errors */
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Game-specific colors */
+    --correct: 145 70% 45%;
+    --correct-foreground: 0 0% 100%;
+    --incorrect: 0 70% 55%;
+    --incorrect-foreground: 0 0% 100%;
+    --streak: 280 70% 55%;
+    --streak-foreground: 0 0% 100%;
+    --xp: 45 95% 55%;
+    --xp-foreground: 30 80% 20%;
+
+    /* Code block styling */
+    --code-bg: 220 20% 12%;
+    --code-foreground: 140 60% 70%;
+
+    --border: 140 15% 88%;
+    --input: 140 15% 88%;
+    --ring: 145 65% 42%;
+
+    --radius: 1rem;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 140 20% 95%;
+
+    --card: 220 18% 14%;
+    --card-foreground: 140 20% 95%;
+
+    --popover: 220 18% 14%;
+    --popover-foreground: 140 20% 95%;
+
+    --primary: 145 65% 50%;
+    --primary-foreground: 220 20% 10%;
+
+    --secondary: 220 18% 20%;
+    --secondary-foreground: 140 20% 90%;
+
+    --muted: 220 15% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 45 90% 50%;
+    --accent-foreground: 30 80% 10%;
+
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --correct: 145 65% 50%;
+    --incorrect: 0 65% 50%;
+    --streak: 280 65% 60%;
+    --xp: 45 90% 50%;
+
+    --border: 220 15% 22%;
+    --input: 220 15% 22%;
+    --ring: 145 65% 50%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Nunito', sans-serif;
+  }
+
+  code, pre {
+    font-family: 'Fira Code', monospace;
+  }
+}
+
+@layer components {
+  .game-card {
+    @apply bg-card rounded-2xl border-2 border-border shadow-lg p-6 transition-all duration-300;
+  }
+
+  .game-card:hover {
+    @apply shadow-xl -translate-y-1;
+  }
+
+  .code-block {
+    @apply rounded-xl p-4 text-sm overflow-x-auto;
+    background-color: hsl(var(--code-bg));
+    color: hsl(var(--code-foreground));
+  }
+
+  .progress-bar {
+    @apply h-3 rounded-full overflow-hidden;
+    background-color: hsl(var(--muted));
+  }
+
+  .progress-bar-fill {
+    @apply h-full rounded-full transition-all duration-500 ease-out;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--correct)));
+  }
+
+  .xp-badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold;
+    background-color: hsl(var(--xp));
+    color: hsl(var(--xp-foreground));
+  }
+
+  .streak-badge {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-bold;
+    background-color: hsl(var(--streak));
+    color: hsl(var(--streak-foreground));
+  }
+}
+
+@layer utilities {
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  .animate-celebrate {
+    animation: celebrate 0.6s ease-out;
+  }
+
+  @keyframes bounce-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / 0.4); }
+    50% { box-shadow: 0 0 20px 5px hsl(var(--primary) / 0.2); }
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+  }
+
+  @keyframes celebrate {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+}
