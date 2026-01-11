@@ -21,7 +21,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
 # bcrypt REMOVED completely (Windows-safe, no 72-byte limit)
 
 pwd_context = CryptContext(
-    schemes=["argon2"],
+    schemes=["argon2"],   #doesnot contain password length
     deprecated="auto",
 )
 
@@ -46,7 +46,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 # JWT UTILITIES
 # =========================
 
-def create_access_token(
+def create_access_token( #creates a signal for jwt token
     data: dict,
     expires_delta: Optional[timedelta] = None
 ) -> str:
@@ -64,7 +64,7 @@ def create_access_token(
 
     to_encode.update({"exp": expire})
 
-    encoded_jwt = jwt.encode(
+    encoded_jwt = jwt.encode(#provides the token
         to_encode,
         SECRET_KEY,
         algorithm=ALGORITHM
