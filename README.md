@@ -1,13 +1,13 @@
 # 🚀 Code Vocabulary Builder (Tech Duolingo)
 
-<p align="center">
+<h1 align="center">
   <strong>👥 Team 4</strong>
-</p>
+</h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Frontend-React%20%2B%20RadixUI-blue" />
   <img src="https://img.shields.io/badge/Backend-FastAPI-green" />
-  <img src="https://img.shields.io/badge/Language-TypeScript%20%7C%20Python-yellow" />
+  <img src="https://img.shields.io/badge/Language-JavaScript%20%7C%20Python-yellow" />
   <img src="https://img.shields.io/badge/Status-Active-success" />
 </p>
 
