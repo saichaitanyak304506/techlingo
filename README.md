@@ -229,4 +229,4 @@ This project was developed by **Team 4**, focusing on **simple collaboration and
 <p align="center">
   <b>✨ Learn. Play. Master Tech Vocabulary ✨</b>
 </p>
->>>>>>> a0f65485e1a62083082a6cb31828e0273de495d1
+
