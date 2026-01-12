@@ -2,7 +2,11 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Navigate,
+} from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 
 import Index from "./pages/Index";
@@ -32,42 +36,47 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/auth" replace />;
   }
 
-  return <>{children}</>;
+  return children;
 };
 
-const AppRoutes = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Index />} />
-      <Route path="/auth" element={<Auth />} />
-      <Route
-        path="/learn"
-        element={
-          <ProtectedRoute>
-            <Learn />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/play"
-        element={
-          <ProtectedRoute>
-            <Play />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/progress"
-        element={
-          <ProtectedRoute>
-            <Progress />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  );
-};
+/* ✅ Router config with v7 future flags */
+const router = createBrowserRouter(
+  [
+    { path: "/", element: <Index /> },
+    { path: "/auth", element: <Auth /> },
+    {
+      path: "/learn",
+      element: (
+        <ProtectedRoute>
+          <Learn />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/play",
+      element: (
+        <ProtectedRoute>
+          <Play />
+        </ProtectedRoute>
+      ),
+    },
+    {
+      path: "/progress",
+      element: (
+        <ProtectedRoute>
+          <Progress />
+        </ProtectedRoute>
+      ),
+    },
+    { path: "*", element: <NotFound /> },
+  ],
+  {
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    },
+  }
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -75,9 +84,12 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
+        <RouterProvider 
+          router={router}
+          future={{
+            v7_startTransition: true,
+          }}
+        />
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>

@@ -2,7 +2,7 @@
 Authentication utilities using JWT and password hashing
 """
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 from jose import JWTError, jwt
 from passlib.context import CryptContext
@@ -21,7 +21,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7  # 7 days
 # bcrypt REMOVED completely (Windows-safe, no 72-byte limit)
 
 pwd_context = CryptContext(
-    schemes=["argon2"],
+    schemes=["argon2"],   #doesnot contain password length
     deprecated="auto",
 )
 
@@ -46,7 +46,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
 # JWT UTILITIES
 # =========================
 
-def create_access_token(
+def create_access_token( #creates a signal for jwt token
     data: dict,
     expires_delta: Optional[timedelta] = None
 ) -> str:
@@ -56,15 +56,15 @@ def create_access_token(
     to_encode = data.copy()
 
     if expires_delta:
-        expire = datetime.utcnow() + expires_delta
+        expire = datetime.now(timezone.utc) + expires_delta
     else:
-        expire = datetime.utcnow() + timedelta(
+        expire = datetime.now(timezone.utc) + timedelta(
             minutes=ACCESS_TOKEN_EXPIRE_MINUTES
         )
 
     to_encode.update({"exp": expire})
 
-    encoded_jwt = jwt.encode(
+    encoded_jwt = jwt.encode(#provides the token
         to_encode,
         SECRET_KEY,
         algorithm=ALGORITHM
